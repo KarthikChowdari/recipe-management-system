@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="site-header">
+    <h1><a th:href="@{/recipes}">Recipe Management System</a></h1>
+    <nav>
+        <a th:href="@{/recipes}">All Recipes</a>
+        <a th:href="@{/recipes/new}">New Recipe</a>
+    </nav>
+</header>
+
+<main class="container">
+    <div class="list-header">
+        <h2>All Recipes</h2>
+        <a th:href="@{/recipes/new}" class="btn">+ New Recipe</a>
+    </div>
+
+    <p class="success-message" th:if="${successMessage}" th:text="${successMessage}"></p>
+
+    <p class="empty-message" th:if="${#lists.isEmpty(recipes)}">
+        No recipes yet. Create the first one!
+    </p>
+
+    <table class="recipe-table" th:unless="${#lists.isEmpty(recipes)}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recipe : ${recipes}">
+            <td th:text="${recipe.id}"></td>
+            <td th:text="${recipe.name}"></td>
+            <td th:text="${recipe.category}"></td>
+            <td><span class="status" th:classappend="'status-' + ${recipe.status}"
+                      th:text="${recipe.status}"></span></td>
+            <td th:text="${#temporals.format(recipe.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td><a th:href="@{/recipes/{id}(id=${recipe.id})}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer class="site-footer">
+    <p>Recipe Management System &mdash; Academic DevOps Project</p>
+</footer>
+</body>
+</html>
