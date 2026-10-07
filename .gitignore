@@ -1,0 +1,48 @@
+# Maven
+target/
+*.class
+
+# Spring Boot
+*.log
+
+# IDE - IntelliJ
+.idea/
+*.iml
+
+# IDE - VS Code
+.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test output
+surefire-reports/
+
+# Selenium
+screenshots/failures/
+
+# Local database
+*.db
+*.mv.db
+
+# Docker
+docker-data/
+
+# Python / Ansible temporary files
+__pycache__/
+*.pyc
