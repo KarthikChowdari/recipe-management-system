@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${recipe.name}">Recipe</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="site-header">
+    <h1><a th:href="@{/recipes}">Recipe Management System</a></h1>
+    <nav>
+        <a th:href="@{/recipes}">All Recipes</a>
+        <a th:href="@{/recipes/new}">New Recipe</a>
+    </nav>
+</header>
+
+<main class="container">
+    <p class="success-message" th:if="${successMessage}" th:text="${successMessage}"></p>
+
+    <article class="recipe-detail">
+        <div class="detail-header">
+            <h2 th:text="${recipe.name}">Recipe name</h2>
+            <span class="status" th:classappend="'status-' + ${recipe.status}"
+                  th:text="${recipe.status}"></span>
+        </div>
+
+        <p class="meta">
+            <strong>Category:</strong> <span th:text="${recipe.category}"></span> &middot;
+            <strong>Created by:</strong> <span th:text="${recipe.createdBy}"></span> &middot;
+            <strong>Created:</strong>
+            <span th:text="${#temporals.format(recipe.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+        </p>
+
+        <section>
+            <h3>Description</h3>
+            <p th:text="${recipe.description}"></p>
+        </section>
+
+        <section>
+            <h3>Ingredients</h3>
+            <p class="prewrapped" th:text="${recipe.ingredients}"></p>
+        </section>
+
+        <section>
+            <h3>Instructions</h3>
+            <p class="prewrapped" th:text="${recipe.instructions}"></p>
+        </section>
+    </article>
+
+    <p><a th:href="@{/recipes}">&larr; Back to recipes</a></p>
+</main>
+
+<footer class="site-footer">
+    <p>Recipe Management System &mdash; Academic DevOps Project</p>
+</footer>
+</body>
+</html>

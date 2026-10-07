@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Recipe</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="site-header">
+    <h1><a th:href="@{/recipes}">Recipe Management System</a></h1>
+    <nav>
+        <a th:href="@{/recipes}">All Recipes</a>
+        <a th:href="@{/recipes/new}">New Recipe</a>
+    </nav>
+</header>
+
+<main class="container">
+    <h2>Create Recipe</h2>
+
+    <form th:action="@{/recipes}" th:object="${recipe}" method="post" class="recipe-form">
+        <div class="form-group">
+            <label for="name">Recipe Name *</label>
+            <input type="text" id="name" th:field="*{name}" required>
+            <p class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" th:field="*{description}" rows="3" required></textarea>
+            <p class="field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="ingredients">Ingredients *</label>
+            <textarea id="ingredients" th:field="*{ingredients}" rows="6"
+                      placeholder="One ingredient per line" required></textarea>
+            <p class="field-error" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="instructions">Instructions *</label>
+            <textarea id="instructions" th:field="*{instructions}" rows="6"
+                      placeholder="One step per line" required></textarea>
+            <p class="field-error" th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category *</label>
+            <select id="category" th:field="*{category}" required>
+                <option value="">-- Select a category --</option>
+                <option th:each="category : ${categories}"
+                        th:value="${category}"
+                        th:text="${category}"></option>
+            </select>
+            <p class="field-error" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Create Recipe</button>
+            <a th:href="@{/recipes}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</main>
+
+<footer class="site-footer">
+    <p>Recipe Management System &mdash; Academic DevOps Project</p>
+</footer>
+</body>
+</html>
